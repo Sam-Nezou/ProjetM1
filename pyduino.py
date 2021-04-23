@@ -2,20 +2,34 @@
 A library to interface Arduino through serial connection
 """
 import serial
+import sys
+from config import *
 
 class Arduino():
     """
     Models an Arduino connection
     """
 
-    def __init__(self, serial_port='/dev/ttyACM0', baud_rate=9600,
+    def __init__(self, serial_port=portUsb, baud_rate=9600,
             read_timeout=5):
         """
         Initializes the serial connection to the Arduino board
         """
-        self.conn = serial.Serial(serial_port, baud_rate)
-        self.conn.timeout = read_timeout # Timeout for readline()
-        print ('connect')
+        while True:
+            try:
+                self.conn = serial.Serial(serial_port, baud_rate)
+                self.conn.timeout = read_timeout # Timeout for readline()
+                print ('connect')
+                self.error = 0
+                break
+                
+            except serial.SerialException as e:
+                self.error = e.errno
+                print("connect failed")
+                break
+
+
+
     def set_pin_mode(self, pin_number, mode):
         """
         Performs a pinMode() operation on pin_number
@@ -25,7 +39,6 @@ class Arduino():
         - P for INPUT_PULLUP MO13
         """
         command = (''.join(('M',mode,str(pin_number)))).encode()
-        #print 'set_pin_mode =',command,(''.join(('M',mode,str(pin_number))))
         print (command)
         self.conn.write(command)
 

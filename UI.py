@@ -34,8 +34,7 @@ class App(QWidget):
     def closeEvent(self, event):
         self.killProcess()
 
-    def __del__(self):
-       self.killProcess()
+   
        
 
     def initTimer(self):
@@ -65,6 +64,8 @@ class App(QWidget):
         # if your arduino was running on a serial port other than '/dev/ttyACM0/'
         # declare: a = Arduino(serial_port='/dev/ttyXXXX')
         self.a = Arduino()
+        if self.a.error == 2:
+            sys.exit(0)
         # sleep to ensure ample time for computer to make serial connection 
         time.sleep(3)
         print ('established!')
