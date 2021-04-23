@@ -12,6 +12,8 @@ from matplot import *
 
 
 
+
+
 class App(QWidget):
 
     def __init__(self):
@@ -33,9 +35,7 @@ class App(QWidget):
     
     def closeEvent(self, event):
         self.killProcess()
-
-   
-       
+    
 
     def initTimer(self):
          # make QTimer
@@ -129,9 +129,6 @@ class App(QWidget):
         graphLayout.addWidget(self.graphPh)
         graphLayout.addWidget(self.graphNtu)
 
-
-
-
         layout  = QVBoxLayout()
 
         layout.addWidget(self.tempLabel)
@@ -179,6 +176,7 @@ class App(QWidget):
     #DE COUPURE DES COMPOSANTS AUX HEURES PAR DÉFAUTS
     @pyqtSlot()
     def setDefault(self, composant):
+        self.blockButton()
         self.runProcess.value = False
         time.sleep(5)
         self.a.send_command('CS',composant.pin,composant.defaultHourStart.hour,composant.defaultHourStart.minute)
@@ -186,9 +184,11 @@ class App(QWidget):
         self.a.send_command('CE',composant.pin,composant.defaultHourEnd.hour,composant.defaultHourEnd.minute)
         time.sleep(3)
         self.runProcess.value = True
+        self.unblockButton()
     
     @pyqtSlot()
     def setHour(self, composant):
+        self.blockButton()
         self.runProcess.value = False
         time.sleep(5)
         self.a.send_command('CS',composant.pin,composant.getComboBoxStartHour(),composant.getComboBoxStartMinute())
@@ -196,16 +196,20 @@ class App(QWidget):
         self.a.send_command('CE',composant.pin,composant.getComboBoxEndHour(),composant.getComboBoxEndMinute())
         time.sleep(3)
         self.runProcess.value = True
+        self.unblockButton()
         
 
     @pyqtSlot()
     def setAltern(self, composant):
+        self.blockButton()
+        
+
         self.runProcess.value = False
         time.sleep(5)
         self.a.send_command('BB',composant.pin,composant.getComboBoxOnTime(),composant.getComboBoxOffTime())
         time.sleep(1)
         self.runProcess.value = True
-        time.sleep(3)
+        self.unblockButton()
 
 
     @pyqtSlot()
@@ -233,7 +237,7 @@ class App(QWidget):
             else:
                 time.sleep(2)
          
-            
+    
     @pyqtSlot()
     def updateGui(self):
         """
@@ -248,6 +252,15 @@ class App(QWidget):
         self.graphPh.addValue(self.ph.value,self.i)
         self.graphNtu.addValue(self.ntu.value,self.i)
         
+    def blockButton(self):
+        self.bulleurUI.blockButton()
+        self.cableChauffantUI.blockButton()
+        self.ledUI.blockButton()
+   
+    def unblockButton(self):
+        self.bulleurUI.unblockButton()
+        self.cableChauffantUI.unblockButton()
+        self.ledUI.unblockButton()
    #----------------------------------------------------------------------------#
 
 

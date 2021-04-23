@@ -63,6 +63,17 @@ class ComposantUI:
         self.layout.addLayout(hoursLayout)
         self.layout.addLayout(buttonLayout)
 
+    
+
+    def blockButton(self):
+        self.buttonDefault.setEnabled(False)
+        self.buttonValidate.setEnabled(False)
+
+
+    def unblockButton(self):
+        self.buttonDefault.setEnabled(True)
+        self.buttonValidate.setEnabled(True)
+
     def getComboBoxStartHour(self):
         return self.startHour.hours.currentIndex()
 

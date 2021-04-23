@@ -27,6 +27,14 @@ class BulleurUI(ComposantUI):
         self.layout.addLayout(pVLayout)
         self.hide()
 
+    def blockButton(self):
+        ComposantUI.blockButton(self)
+        self.validatePeriod.setEnabled(False)
+
+    def unblockButton(self):
+        ComposantUI.unblockButton(self)
+        self.validatePeriod.setEnabled(True)
+
     def hide(self):
     
         self.onLabel.hide()
@@ -46,13 +54,9 @@ class BulleurUI(ComposantUI):
         ComposantUI.show(self)
 
     def getComboBoxOnTime(self):
-        print(self.onTimeCombo.currentIndex())
-
         return self.onTimeCombo.currentIndex()
     
     def getComboBoxOffTime(self):
-        print(self.offTimeCombo.currentIndex())
-
         return self.offTimeCombo.currentIndex()
 
 
