@@ -66,27 +66,49 @@ class ComposantUI:
     
 
     def blockButton(self):
+        """
+        Bloque l'utilisation des boutons du composant
+        """
+
         self.buttonDefault.setEnabled(False)
         self.buttonValidate.setEnabled(False)
 
 
     def unblockButton(self):
+        """
+        Débloque l'utilisation des boutons
+        """
         self.buttonDefault.setEnabled(True)
         self.buttonValidate.setEnabled(True)
 
     def getComboBoxStartHour(self):
+        """
+        Retourne la valeur de l'heure d'allumage
+        """
         return self.startHour.hours.currentIndex()
 
     def getComboBoxStartMinute(self):
+        """
+        Retourne la valeur de la minute d'allumage
+        """
         return self.startHour.minutes.currentIndex()
 
     def getComboBoxEndHour(self):
+        """
+        Retourne la valeur de l'heure de coupure
+        """
         return self.endHour.hours.currentIndex()
 
     def getComboBoxEndMinute(self):
+        """
+        Retourne la valeur de la minute de coupure
+        """
         return self.endHour.minutes.currentIndex()
 
     def hide(self):
+        """
+        Cache tous les widgets
+        """
         
         self.label.hide()
         self.buttonDefault.hide()
@@ -99,7 +121,9 @@ class ComposantUI:
         self.startHour.label.hide()
         self.visible = False
     def show(self):
-        
+        """
+        Affiche tous les widgets
+        """
         self.label.show() 
         self.buttonDefault.show()
         self.buttonValidate.show()
