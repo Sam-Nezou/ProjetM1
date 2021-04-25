@@ -107,6 +107,14 @@ class Arduino():
 
 
     def read_command(self, pin_number,request,typeCom):
+        """
+        Fonction pour envoyer une ligne de commande à l'arduino et récupérer une valeur
+        \trequest : contient les deux lettres correspondant  à la requête  
+        \tpin_number : correspond au pin ou est brancher le composant
+        \ttypeCom : Soit A pour analogique ou D pour digital
+
+        \treturn : float
+        """
         
         command = (''.join((request, str(pin_number)))).encode()
         self.conn.write(command)

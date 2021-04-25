@@ -28,15 +28,25 @@ class BulleurUI(ComposantUI):
         self.hide()
 
     def blockButton(self):
+        """
+        Bloque l'utilisation des boutons du composant
+        """
+
         ComposantUI.blockButton(self)
         self.validatePeriod.setEnabled(False)
 
     def unblockButton(self):
+        """
+        Débloque l'utilisation des boutons
+        """
         ComposantUI.unblockButton(self)
         self.validatePeriod.setEnabled(True)
 
     def hide(self):
-    
+        """
+        Cache tous les widgets
+        """
+        
         self.onLabel.hide()
         self.offLabel.hide()
         self.offTimeCombo.hide()
@@ -45,7 +55,9 @@ class BulleurUI(ComposantUI):
         ComposantUI.hide(self)
 
     def show(self): 
-    
+        """
+        Affiche tous les widgets
+        """
         self.onLabel.show()
         self.offLabel.show()
         self.offTimeCombo.show()
