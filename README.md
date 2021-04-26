@@ -45,7 +45,7 @@ Le fichier de configuration [config.py](https://github.com/Sam-Nezou/ProjetM1/bl
 
 __3. Utilisation__
 
-* Programme ne ce lance qu'une fois le port USB branché.
+* Programme ne se lance qu'une fois le port USB branché.
 * Si l'appliction ne se lance pas bien vérifier le numéro du port.
 
 
